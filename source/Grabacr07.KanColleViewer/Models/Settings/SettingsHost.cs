@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Windows;
 using MetroTrilithon.Serialization;
 
 namespace Grabacr07.KanColleViewer.Models.Settings
@@ -39,7 +37,6 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			return property;
 		}
 
-		#region Load / Save
 
 		public static void Load()
 		{
@@ -48,60 +45,16 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			// (ただし、1 度読んだら新しい方に移行するので保存はしない
 			Migration._Settings.Load();
 #pragma warning restore 612
-			
-			try
-			{
-				Providers.Local.Load();
-			}
-			catch (Exception)
-			{
-				File.Delete(Providers.LocalFilePath);
-				Providers.Local.Load();
-			}
 
-			try
-			{
-				Providers.Roaming.Load();
-			}
-			catch (Exception)
-			{
-				File.Delete(Providers.RoamingFilePath);
-				Providers.Roaming.Load();
-			}
+			Providers.Local.Load();
+			Providers.Roaming.Load();
 		}
 
 		public static void Save()
 		{
-			#region const message
-
-			const string message = @"設定ファイル ({0}) の保存に失敗しました。
-
-エラーの詳細: {1}";
-
-			#endregion
-
-			try
-			{
-				Providers.Local.Save();
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(string.Format(message, Providers.LocalFilePath, ex.Message), "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
-				throw;
-			}
-
-			try
-			{
-				Providers.Roaming.Save();
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(string.Format(message, Providers.RoamingFilePath, ex.Message), "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
-				throw;
-			}
+			Providers.Local.Save();
+			Providers.Roaming.Save();
 		}
-
-		#endregion
 
 		/// <summary>
 		/// <typeparamref name="T"/> 型の設定オブジェクトの唯一のインスタンスを取得します。

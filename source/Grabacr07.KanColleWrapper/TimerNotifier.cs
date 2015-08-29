@@ -36,7 +36,7 @@ namespace Grabacr07.KanColleWrapper
 
 		public virtual void Dispose()
 		{
-			this.subscriber?.Dispose();
+			this.subscriber.SafeDispose();
 		}
 	}
 }

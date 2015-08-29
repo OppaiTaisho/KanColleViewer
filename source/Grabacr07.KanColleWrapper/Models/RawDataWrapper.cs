@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,8 +14,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 艦これ API からの応答に含まれる api_data をパースした生のデータを取得します。
 		/// </summary>
-		[EditorBrowsable(EditorBrowsableState.Never)]
-		public T RawData { get; private set; }
+		internal T RawData { get; private set; }
 
 		/// <summary>
 		/// ラップする api_data (生のデータ) を使用して、<see cref="RawDataWrapper{T}" /> クラスの新しいインスタンスを初期化します。

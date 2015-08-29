@@ -74,7 +74,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			else
 			{
-				foreach (var dock in this.Docks) dock.Value?.Dispose();
+				foreach (var dock in this.Docks) dock.Value.SafeDispose();
 				this.Docks = new MemberTable<RepairingDock>(source.Select(x => new RepairingDock(this.homeport, x)));
 			}
 		}
